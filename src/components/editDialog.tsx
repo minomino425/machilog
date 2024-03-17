@@ -9,7 +9,6 @@ export default function EditDialog(props: {
 }) {
   const { showModal, taskList } = props;
   const [shop_name, setText] = useState("");
-
   const onSubmit = async (event: any) => {
     event.preventDefault();
     showModal(false);

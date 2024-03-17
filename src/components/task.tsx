@@ -2,7 +2,7 @@
 import { useState, Dispatch, SetStateAction, ReactElement } from "react";
 import EditDialog from "./editDialog";
 import RemoveDialog from "./removeDialog";
-
+import Upload from "./upload";
 export default function Task(props: {
   id: number;
   shop_name: string;
@@ -21,6 +21,7 @@ export default function Task(props: {
     <>
       <div>
         <p className="text-gray-600 break-all">{shop_name}</p>
+        <Upload />
         <p className="text-xs text-gray-400">
           最終更新日時：{last_update.toLocaleString("ja-JP")}
         </p>
