@@ -4,7 +4,7 @@ import { supabase } from "../utils/supabase";
 
 export default function Upload(){
   const [ path,setPathName ] = useState<string | undefined>();
-  const handleUploadStorage = async (folder: FolderList | null) => {
+  const handleUploadStorage = async (folder: FileList | null) => {
     if (!folder || !folder.length) return;
     const { path } = await uploadStorage({
       folder,
@@ -29,7 +29,7 @@ export default function Upload(){
           handleUploadStorage(fileList);
         }}
       />
-      <img src={path} alt="" width="800" height="500"/>;
+    {path && <img src={path} alt="" width="800" height="500"/>}
     </label>
   );
 };
