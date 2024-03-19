@@ -1,6 +1,5 @@
 "use client";
 import { useState, Dispatch, SetStateAction, ReactElement } from "react";
-import Upload from "./upload";
 import EditData from "./editData";
 import Link from "next/link";
 
@@ -22,7 +21,6 @@ export default function Task(props: {
         <Link href={`/detail/${id}`} passHref>
           <span className="text-gray-600 break-all">{shop_name}</span>
         </Link>
-        <Upload />
         <p className="text-xs text-gray-400">
           最終更新日時：{last_update.toLocaleString("ja-JP")}
         </p>

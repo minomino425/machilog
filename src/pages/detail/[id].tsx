@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { getShopInfoById } from '../../components/api';
+import Upload from "../../components/upload";
 
 export default function TaskDetailPage() {
   const router = useRouter();
@@ -18,7 +19,6 @@ export default function TaskDetailPage() {
     try {
       const data = await getShopInfoById(Number(id));
       setShopInfo(data);
-      console.log(data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -32,6 +32,7 @@ export default function TaskDetailPage() {
     <div>
       <h1>{shopInfo.shop_name}</h1>
       <p>{shopInfo.shop_review}</p>
+      <Upload id={Number(id)}/>
       <p>最終更新日時：{new Date(shopInfo.created_at).toLocaleString("ja-JP")}</p>
     </div>
   );

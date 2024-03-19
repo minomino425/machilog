@@ -15,11 +15,11 @@ export const uploadStorage = async ({
   bucketName,
 }: UploadStorage): Promise<UploadPathname> => {
     const file = folder[0]; // 1ファイルアップロード
-    const pathName = `characters/${uuidv4()}`; // パス名の設定
+    const pathName = `thumbnail/${uuidv4()}`; // パス名の設定
     const { data, error } = await supabase.storage
       .from(bucketName)
       .upload(pathName, file, {
-        cacheControl: "3600",
+        cacheControl: "public,max-age=31536000", // 1 year
         upsert: false,
       });
     if (error) throw error;
@@ -27,5 +27,3 @@ export const uploadStorage = async ({
       path: data?.path ?? null,
     };
 };
-
-
