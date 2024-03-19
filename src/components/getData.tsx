@@ -1,36 +1,37 @@
+// getData.tsx
+
+import { Dispatch, SetStateAction, ReactElement } from "react";
 import { supabase } from "@/utils/supabase";
 import Task from "./task";
-import { Dispatch, SetStateAction, ReactElement } from "react";
 
+// データ取得とタスクリストの更新を行う関数
 export default async function getData(
   taskList: Dispatch<SetStateAction<Array<ReactElement>>>
 ) {
-  const tmpTaskList = [];
   try {
-    let { data: shopInfo, error } = await supabase.from("shopInfo").select("*");
+    const { data: shopInfo, error } = await supabase.from("shopInfo").select("*");
     if (error) {
-      console.log(error);
+      throw error;
     }
 
     if (shopInfo != null) {
-      for (let index = 0; index < shopInfo.length; index++) {
-        tmpTaskList.push(
-          <li
-            className="flex items-center justify-between py-2"
-            key={shopInfo[index]["id"]}
-          >
+      const tmpTaskList: ReactElement[] = shopInfo.map((shop: any) => (
+        <li
+          className="flex items-center justify-between py-2"
+          key={shop.id}
+        >
             <Task
               taskList={taskList}
-              id={shopInfo[index]["id"]}
-              shop_name={shopInfo[index]["shop_name"] ?? ""}
-              created_at={shopInfo[index]["created_at"] ?? ""}
-            ></Task>
-          </li>
-        );
-      }
-      taskList(tmpTaskList);
+              id={shop.id}
+              shop_name={shop.shop_name ?? ""}
+              created_at={shop.created_at ?? ""}
+            />
+        </li>
+      ));
+
+      taskList(tmpTaskList); // taskListを更新
     }
   } catch (error) {
-    console.log(error);
+    console.log("Error fetching data:", error);
   }
 }

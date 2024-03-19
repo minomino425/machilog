@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { supabase } from "../utils/supabase";
 
 type UploadStorage = {
-  folder: FolderList;
+  folder: FileList;
   bucketName: string;
 };
 

@@ -12,7 +12,6 @@ export default function Upload(){
     });
     const { data } = supabase.storage.from("pictures").getPublicUrl(path)
     if (path) setPathName(data.publicUrl);
-    console.log(path)
   };
   return (
     <label htmlFor="file-upload">
