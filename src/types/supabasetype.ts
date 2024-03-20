@@ -17,6 +17,7 @@ export type Database = {
           shop_genre: string | null
           shop_name: string | null
           shop_number: string | null
+          imageUrl: string | null
         }
         Insert: {
           created_at?: string
@@ -25,6 +26,7 @@ export type Database = {
           shop_genre?: string | null
           shop_name?: string | null
           shop_number?: string | null
+          imageUrl?: string | null
         }
         Update: {
           created_at?: string
@@ -33,6 +35,7 @@ export type Database = {
           shop_genre?: string | null
           shop_name?: string | null
           shop_number?: string | null
+          imageUrl?: string | null
         }
         Relationships: []
       }
