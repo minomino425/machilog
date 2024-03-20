@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Header from "../components/task";
+import Header from "../components/shop";
 import { supabase } from "../utils/supabase";
 
 export default function Register() {

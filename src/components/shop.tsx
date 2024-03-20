@@ -1,13 +1,11 @@
-"use client";
 import { useState, Dispatch, SetStateAction, ReactElement } from "react";
-import EditData from "./editData";
 import Link from "next/link";
 
-export default function Task(props: {
+export default function Shop(props: {
   id: number;
   shop_name: string;
   created_at: string;
-  taskList: Dispatch<SetStateAction<Array<ReactElement>>>;
+  shopList: Dispatch<SetStateAction<Array<ReactElement>>>;
 }) {
 
   const id = props.id;
@@ -21,11 +19,7 @@ export default function Task(props: {
         <Link href={`/detail/${id}`} passHref>
           <span className="text-gray-600 break-all">{shop_name}</span>
         </Link>
-        <p className="text-xs text-gray-400">
-          最終更新日時：{last_update.toLocaleString("ja-JP")}
-        </p>
       </div>
-      <EditData id={id} shop_name={shop_name} created_at={created_at} taskList={props.taskList}/>
     </>
   );
 }

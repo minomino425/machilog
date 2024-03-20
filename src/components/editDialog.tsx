@@ -5,9 +5,9 @@ import getData from "./getData";
 export default function EditDialog(props: {
   id: number;
   showModal: Dispatch<SetStateAction<boolean>>;
-  taskList: Dispatch<SetStateAction<Array<ReactElement>>>;
+  shopList: Dispatch<SetStateAction<Array<ReactElement>>>;
 }) {
-  const { showModal, taskList } = props;
+  const { showModal, shopList } = props;
   const [shop_name, setText] = useState("");
   const onSubmit = async (event: any) => {
     event.preventDefault();
@@ -22,7 +22,7 @@ export default function EditDialog(props: {
         console.log(error);
       }
 
-      await getData(taskList);
+      await getData(shopList);
     } catch (error) {
       console.log(error);
     }

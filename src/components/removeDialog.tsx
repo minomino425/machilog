@@ -5,9 +5,9 @@ import getData from "./getData";
 export default function RemoveDialog(props: {
   id: number;
   showModal: Dispatch<SetStateAction<boolean>>;
-  taskList: Dispatch<SetStateAction<Array<ReactElement>>>;
+  shopList: Dispatch<SetStateAction<Array<ReactElement>>>;
 }) {
-  const { showModal, taskList } = props;
+  const { showModal, shopList } = props;
 
   const onSubmit = async (event: any) => {
     event.preventDefault();
@@ -21,7 +21,7 @@ export default function RemoveDialog(props: {
         console.log(error);
       }
 
-      await getData(taskList);
+      await getData(shopList);
     } catch (error) {
       console.log(error);
     }

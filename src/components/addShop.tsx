@@ -1,10 +1,9 @@
-"use client";
 import { supabase } from "@/utils/supabase";
 import { Dispatch, SetStateAction, ReactElement, useState } from "react";
 import getData from "./getData";
 
-export default function AddTask(props: {
-  taskList: Dispatch<SetStateAction<Array<ReactElement>>>;
+export default function AddShop(props: {
+  shopList: Dispatch<SetStateAction<Array<ReactElement>>>;
 }) {
   const [shop_name, setText] = useState("");
 
@@ -19,7 +18,7 @@ export default function AddTask(props: {
         console.log(error);
       }
 
-      await getData(props.taskList);
+      await getData(props.shopList);
     } catch (error) {
       console.log(error);
     }

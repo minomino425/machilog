@@ -1,4 +1,3 @@
-"use client";
 import { useState, Dispatch, SetStateAction, ReactElement } from "react";
 import EditDialog from "./editDialog";
 import RemoveDialog from "./removeDialog";
@@ -6,7 +5,7 @@ export default function editData(props: {
   id: number;
   shop_name: string;
   created_at: string;
-  taskList: Dispatch<SetStateAction<Array<ReactElement>>>;
+  shopList: Dispatch<SetStateAction<Array<ReactElement>>>;
 }) {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showRemoveModal, setShowRemoveModal] = useState(false);
@@ -37,14 +36,14 @@ export default function editData(props: {
       {showEditModal ? (
         <EditDialog
           id={id}
-          taskList={props.taskList}
+          shopList={props.shopList}
           showModal={setShowEditModal}
         ></EditDialog>
       ) : null}
       {showRemoveModal ? (
         <RemoveDialog
           id={id}
-          taskList={props.taskList}
+          shopList={props.shopList}
           showModal={setShowRemoveModal}
         ></RemoveDialog>
       ) : null}
