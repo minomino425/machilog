@@ -24,7 +24,7 @@ export default async function getData(
               shopList={shopList}
               id={shop.id}
               shop_name={shop.shop_name ?? ""}
-              created_at={shop.created_at ?? ""}
+              imageUrl={shop.imageUrl ?? ""}
             />
         </li>
       ));

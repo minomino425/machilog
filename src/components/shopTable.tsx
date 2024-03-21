@@ -6,7 +6,6 @@ import getData from "./getData";
 export default function ShopTable() {
   const [shopList, setShopList] = useState<Array<ReactElement>>([]);
 
-  // 初回のみ実行したいので、第二引数が空のuseEffectでデータ取得
   useEffect(() => {
     getData(setShopList);
   }, []);

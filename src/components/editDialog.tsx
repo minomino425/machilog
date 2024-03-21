@@ -1,6 +1,7 @@
 import { supabase } from "@/utils/supabase";
 import { Dispatch, SetStateAction, ReactElement, useState } from "react";
 import getData from "./getData";
+import Upload from "./upload";
 
 export default function EditDialog(props: {
   id: number;
@@ -9,13 +10,15 @@ export default function EditDialog(props: {
 }) {
   const { showModal, shopList } = props;
   const [shop_name, setText] = useState("");
+  const [shop_review, setReview] = useState("");
+
   const onSubmit = async (event: any) => {
     event.preventDefault();
     showModal(false);
     try {
       const { data, error } = await supabase
         .from("shopInfo")
-        .update({ shop_name: shop_name })
+        .update({ shop_name: shop_name, shop_review: shop_review})
         .eq("id", props.id)
         .select();
       if (error) {
@@ -33,7 +36,7 @@ export default function EditDialog(props: {
       <div className="m-auto relative p-4 w-full max-w-md max-h-full">
         <div className="relative bg-white rounded-lg shadow">
           <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
-            <h3 className="text-xl font-semibold text-gray-900">店名の編集</h3>
+            <h3 className="text-xl font-semibold text-gray-900">編集</h3>
             <button
               type="button"
               className="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
@@ -68,8 +71,19 @@ export default function EditDialog(props: {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   required
                   value={shop_name}
+                  placeholder="店名を入力してください"
                   onChange={(e) => setText(e.target.value)}
                 />
+                <textarea
+                  name="text"
+                  id="review"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                  required
+                  value={shop_review}
+                  placeholder="レビューを入力してください"
+                  onChange={(e) => setReview(e.target.value)}
+                />
+                <Upload id={props.id} />
               </div>
               <div>
                 <button
