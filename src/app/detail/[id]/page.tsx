@@ -7,10 +7,8 @@ import EditData from "../../../components/editData";
 
 export default function ShopDetailPage() {
   const params = useParams();
-  console.log(params);
   //pathnameからidを取得
   const id = params?.id;
-  // const { id } = pathname;
   const [shopInfo, setShopInfo] = useState<any>(null);
 
   useEffect(() => {

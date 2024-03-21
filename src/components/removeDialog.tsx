@@ -1,6 +1,7 @@
 import { supabase } from "@/utils/supabase";
 import { Dispatch, SetStateAction, ReactElement } from "react";
 import getData from "./getData";
+import { useRouter } from 'next/navigation';
 
 export default function RemoveDialog(props: {
   id: number;
@@ -8,7 +9,7 @@ export default function RemoveDialog(props: {
   shopList: Dispatch<SetStateAction<Array<ReactElement>>>;
 }) {
   const { showModal, shopList } = props;
-
+  const router = useRouter(); 
   const onSubmit = async (event: any) => {
     event.preventDefault();
     showModal(false);
@@ -22,6 +23,7 @@ export default function RemoveDialog(props: {
       }
 
       await getData(shopList);
+      router.push("/");
     } catch (error) {
       console.log(error);
     }
