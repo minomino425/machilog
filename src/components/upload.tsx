@@ -27,13 +27,7 @@ export default function Upload(props: {id: number}){
     }
 
     // アップロードが成功したら画像のURLを取得
-    const { data, error: getUrlError } = await supabase.storage.from('pictures').getPublicUrl(filePath);
-
-    if (getUrlError) {
-      // URL取得エラーが発生した場合の処理
-      console.error('URL retrieval error:', getUrlError);
-      return;
-    }
+    const { data } = await supabase.storage.from('pictures').getPublicUrl(filePath);
 
     const imageUrl = data?.publicUrl;
 
