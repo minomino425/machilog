@@ -29,7 +29,7 @@ export default async function getData(
         </li>
       ));
 
-      shopList(tmpShopList); // shopListを更新
+      shopList(tmpShopList);
     }
   } catch (error) {
     console.log("Error fetching data:", error);

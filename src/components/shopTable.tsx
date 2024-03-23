@@ -15,7 +15,7 @@ export default function ShopTable() {
       <div className="p-4">
         <h1 className="text-xl font-bold text-gray-800">マチログ</h1>
         <AddShop shopList={setShopList}></AddShop>
-        <ul className="mt-4 divide-y divide-gray-200">{shopList}</ul>
+        <ul className="mt-4 divide-y divide-gray-200 flex flex-wrap">{shopList}</ul>
       </div>
     </div>
   );
