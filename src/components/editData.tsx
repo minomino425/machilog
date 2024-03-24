@@ -1,19 +1,24 @@
 import { useState, Dispatch, SetStateAction, ReactElement } from "react";
 import EditDialog from "./editDialog";
 import RemoveDialog from "./removeDialog";
+type shopInfoType = {
+  created_at: string;
+  id: number;
+  shop_genre: string | null;
+  shop_name: string | null;
+  shop_review: string | null;
+  imageUrl: string | null;
+} | null
+
 export default function editData(props: {
   id: number;
-  shop_name: string;
-  created_at: string;
-  shopList: Dispatch<SetStateAction<Array<ReactElement>>>;
+  shop_name: string | null;
+  created_at: string | null;
 }) {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showRemoveModal, setShowRemoveModal] = useState(false);
 
   const id = props.id;
-  const shop_name = props.shop_name;
-  const created_at = props.created_at;
-  let last_update = new Date(created_at);
 
   return (
     <>
@@ -36,14 +41,12 @@ export default function editData(props: {
       {showEditModal ? (
         <EditDialog
           id={id}
-          shopList={props.shopList}
           showModal={setShowEditModal}
         ></EditDialog>
       ) : null}
       {showRemoveModal ? (
         <RemoveDialog
           id={id}
-          shopList={props.shopList}
           showModal={setShowRemoveModal}
         ></RemoveDialog>
       ) : null}
