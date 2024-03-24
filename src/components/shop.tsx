@@ -5,7 +5,6 @@ export default function Shop(props: {
   id: number;
   shop_name: string;
   imageUrl: string;
-  shopList: Dispatch<SetStateAction<Array<ReactElement>>>;
 }) {
 
   const id = props.id;

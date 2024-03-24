@@ -6,9 +6,8 @@ import Upload from "./upload";
 export default function EditDialog(props: {
   id: number;
   showModal: Dispatch<SetStateAction<boolean>>;
-  shopList: Dispatch<SetStateAction<Array<ReactElement>>>;
 }) {
-  const { showModal, shopList } = props;
+  const { showModal } = props;
   const [shop_name, setText] = useState("");
   const [shop_review, setReview] = useState("");
 
@@ -24,8 +23,6 @@ export default function EditDialog(props: {
       if (error) {
         console.log(error);
       }
-
-      await getData(shopList);
     } catch (error) {
       console.log(error);
     }
