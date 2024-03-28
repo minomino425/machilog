@@ -6,9 +6,8 @@ import { useRouter } from 'next/navigation';
 export default function RemoveDialog(props: {
   id: number;
   showModal: Dispatch<SetStateAction<boolean>>;
-  shopList: Dispatch<SetStateAction<Array<ReactElement>>>;
 }) {
-  const { showModal, shopList } = props;
+  const { showModal } = props;
   const router = useRouter(); 
   const onSubmit = async (event: any) => {
     event.preventDefault();
@@ -21,8 +20,6 @@ export default function RemoveDialog(props: {
       if (error) {
         console.log(error);
       }
-
-      await getData(shopList);
       router.push("/");
     } catch (error) {
       console.log(error);

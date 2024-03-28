@@ -21,7 +21,6 @@ export default async function getData(
           key={shop.id}
         >
             <Shop
-              shopList={shopList}
               id={shop.id}
               shop_name={shop.shop_name ?? ""}
               imageUrl={shop.imageUrl ?? ""}
