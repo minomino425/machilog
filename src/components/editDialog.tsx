@@ -1,6 +1,5 @@
 import { supabase } from "@/utils/supabase";
 import { Dispatch, SetStateAction, ReactElement, useState } from "react";
-import getData from "./getData";
 import Upload from "./upload";
 
 export default function EditDialog(props: {
@@ -22,6 +21,8 @@ export default function EditDialog(props: {
         .select();
       if (error) {
         console.log(error);
+      } else {
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);
