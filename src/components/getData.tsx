@@ -1,5 +1,3 @@
-// getData.tsx
-
 import { Dispatch, SetStateAction, ReactElement } from "react";
 import { supabase } from "@/utils/supabase";
 import Shop from "./shop";

@@ -1,6 +1,5 @@
 import { supabase } from "@/utils/supabase";
 import { Dispatch, SetStateAction, ReactElement } from "react";
-import getData from "./getData";
 import { useRouter } from 'next/navigation';
 
 export default function RemoveDialog(props: {
