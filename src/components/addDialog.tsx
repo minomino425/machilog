@@ -66,6 +66,15 @@ export default function AddDialog(props: { showModal: Dispatch<SetStateAction<bo
                 value={shop_name}
                 onChange={(e) => setText(e.target.value)}
             />
+            <textarea
+                  name="text"
+                  id="review"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                  required
+                  value={shop_review}
+                  placeholder="レビューを入力してください"
+                  onChange={(e) => setReview(e.target.value)}
+                />
             <button
                 type="submit"
                 className="mt-2 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg px-4 py-2"
