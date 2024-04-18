@@ -17,7 +17,7 @@ export default function AddDialog(props: { showModal: Dispatch<SetStateAction<bo
         .insert({ shop_name: shop_name, shop_review: shop_review})
         .select();
       if (error) {
-        console.log(error);
+        // console.log(error);
       } else {
         window.location.reload();
       }
