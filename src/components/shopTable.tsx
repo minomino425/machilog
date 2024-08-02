@@ -11,7 +11,7 @@ export default function ShopTable() {
   }, []);
 
   return (
-    <div className="bg-white rounded-xl max-w-[94%]">
+    <div className="bg-white rounded-xl max-w-[355px]">
       <div className="p-4">
         <h1 className="text-xl font-bold text-gray-800">マチログ</h1>
         <AddShop />
