@@ -29,7 +29,7 @@ export default function AddDialog(props: { showModal: Dispatch<SetStateAction<bo
   return (
     <div className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-screen bg-black-rgba pt-28">
       <div className="m-auto relative p-4 w-full max-w-md max-h-full">
-        <div className="relative bg-white rounded-lg shadow">
+        <div className="relative bg-white rounded-lg max-w-355">
           <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
             <h3 className="text-xl font-semibold text-gray-900">追加</h3>
             <button
