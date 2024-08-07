@@ -2,7 +2,6 @@ import { Dispatch, SetStateAction, ReactElement } from "react";
 import { supabase } from "@/utils/supabase";
 import Shop from "./shop";
 
-// データ取得とタスクリストの更新を行う関数
 export default async function getData(
   shopList: Dispatch<SetStateAction<Array<ReactElement>>>
 ) {
@@ -15,7 +14,7 @@ export default async function getData(
     if (shopInfo != null) {
       const tmpShopList: ReactElement[] = shopInfo.map((shop: any) => (
         <li
-          className="flex items-center justify-between py-2"
+          className="flex items-center"
           key={shop.id}
         >
             <Shop

@@ -13,12 +13,10 @@ export default function Shop(props: {
 
   return (
     <>
-      <div>
-        <Link href={`/detail/${id}`} passHref>
-          <span className="text-gray-600 break-all">{shop_name}</span>
-          <img src={imageUrl} alt={shop_name} className="w-40 h-40 block ml-2" />
+        <Link href={`/detail/${id}`} passHref className="text-center">
+          <img src={imageUrl} alt={shop_name} className="w-36 h-36 block [clip-path:circle(40%)]" />
+          <span className="block text-[14px] font-[600] tracking-wider">{shop_name}</span>
         </Link>
-      </div>
     </>
   );
 }

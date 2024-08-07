@@ -11,11 +11,10 @@ export default function ShopTable() {
   }, []);
 
   return (
-    <div className="bg-white rounded-xl max-w-[355px]">
-      <div className="p-4">
-        <h1 className="text-xl font-bold text-gray-800">マチログ</h1>
+    <div className="bg-white rounded-3xl max-w-[355px] border-2 border-[#090A0A]">
+      <div className="p-5">
         <AddShop />
-        <ul className="mt-4 divide-y divide-gray-200 flex flex-wrap">{shopList}</ul>
+        <ul className="flex justify-between flex-wrap gap-y-9">{shopList}</ul>
       </div>
     </div>
   );
