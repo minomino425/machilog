@@ -14,12 +14,12 @@ export const uploadStorage = async ({
   folder,
   bucketName,
 }: UploadStorage): Promise<UploadPathname> => {
-    const file = folder[0]; // 1ファイルアップロード
-    const pathName = `thumbnail/${uuidv4()}`; // パス名の設定
+    const file = folder[0]; 
+    const pathName = `thumbnail/${uuidv4()}`;
     const { data, error } = await supabase.storage
       .from(bucketName)
       .upload(pathName, file, {
-        cacheControl: "public,max-age=31536000", // 1 year
+        cacheControl: "public,max-age=31536000",
         upsert: false,
       });
     if (error) throw error;

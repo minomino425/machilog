@@ -1,6 +1,11 @@
-import Head from 'next/head';
 import React from 'react';
 import "./globals.css";
+import { Noto_Sans_JP } from "next/font/google";
+
+const NotoSansJPFont = Noto_Sans_JP({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 export default function RootLayout({
   children,
@@ -8,9 +13,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html>
+    <html className={NotoSansJPFont.className}>
       <head />
-      <body className="bg-pattern">{children}</body>
+      <body className="font-noto-sans-jp bg-pattern">
+        {children}
+      </body>
     </html>
   )
 }

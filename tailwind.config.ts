@@ -8,6 +8,18 @@ const bgPlugin = plugin(function ({ addComponents }) {
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
     },
+    '@keyframes loop-slide': {
+      '0%': {
+        transform: 'translateX(0)',
+      },
+      '100%': {
+        transform: 'translateX(-100%)',
+      },
+    },
+    '.loop-animation': {
+      display: 'flex',
+      animation: 'loop-slide 20s infinite linear 1s both',
+    },
   });
 });
 

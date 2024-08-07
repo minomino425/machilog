@@ -30,7 +30,7 @@ export default function AddDialog(props: { showModal: Dispatch<SetStateAction<bo
     <div className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-screen bg-black-rgba pt-28">
       <div className="m-auto relative p-4 w-full max-w-md max-h-full">
         <div className="relative bg-white rounded-lg max-w-355">
-          <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+          <div className="flex items-center p-4 md:p-5 border-b rounded-t">
             <h3 className="text-xl font-semibold text-gray-900">追加</h3>
             <button
               type="button"
@@ -77,7 +77,7 @@ export default function AddDialog(props: { showModal: Dispatch<SetStateAction<bo
                 />
             <button
                 type="submit"
-                className="mt-2 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg px-4 py-2"
+                className="mt-2 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg px-4"
             >
                 追加
             </button>
