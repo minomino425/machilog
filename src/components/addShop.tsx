@@ -8,7 +8,7 @@ export default function AddShop (){
     <>
     <button
           type="button"
-          className="w-20 h-20 grid place-items-center rounded-full border-2 border-[#090A0A]"
+          className="w-20 h-20 bg-[#FDFF89] grid place-items-center rounded-full border-2 border-[#090A0A] absolute -bottom-5 -right-2"
           onClick={() => setShowEditModal(true)}
         >
        <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
