@@ -49,7 +49,6 @@ export default function Upload(props: { id: number }) {
   };
 
   useEffect(() => {
-    // shopInfoテーブルから最新のimageUrlを取得
     async function fetchImageUrl() {
       try {
         const { data, error } = await supabase
