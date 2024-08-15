@@ -1,12 +1,11 @@
 import { useState, useEffect, ChangeEvent } from 'react';
-import { supabase } from "../utils/supabase";
+import { supabase } from '../utils/supabase';
 
-export default function Upload(props: {id: number}){
-
+export default function Upload(props: { id: number }) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   const handleImageChange = async (
-    event: ChangeEvent<HTMLInputElement>
+    event: ChangeEvent<HTMLInputElement>,
   ): Promise<void> => {
     if (!event.target.files || event.target.files.length === 0) {
       // 画像が選択されていない場合は処理を終了
@@ -27,7 +26,9 @@ export default function Upload(props: {id: number}){
     }
 
     // アップロードが成功したら画像のURLを取得
-    const { data } = await supabase.storage.from('pictures').getPublicUrl(filePath);
+    const { data } = await supabase.storage
+      .from('pictures')
+      .getPublicUrl(filePath);
 
     const imageUrl = data?.publicUrl;
 
@@ -55,7 +56,7 @@ export default function Upload(props: {id: number}){
           .from('shopInfo')
           .select('imageUrl')
           .eq('id', props.id);
-          console.log(data);
+        console.log(data);
         if (error) {
           throw error;
         }
@@ -74,7 +75,7 @@ export default function Upload(props: {id: number}){
   return (
     <div>
       <input type="file" onChange={handleImageChange} />
-      {imageUrl && <img src={imageUrl} alt="" width="800" height="500"/>}
+      {imageUrl && <img src={imageUrl} alt="" width="800" height="500" />}
     </div>
   );
-};
+}
