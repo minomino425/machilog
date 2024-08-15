@@ -1,5 +1,5 @@
 import { supabase } from '@/utils/supabase';
-import { Dispatch, SetStateAction, ReactElement, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 export default function AddDialog(props: {
   showModal: Dispatch<SetStateAction<boolean>>;
@@ -12,11 +12,46 @@ export default function AddDialog(props: {
   const [favorite_menu_03, setMenu03] = useState('');
   const [instagram_id, setInstagramId] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [imageFile, setImageFile] = useState<File | null>(null);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
+    if (file) {
+      setImageFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageUrl(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const uploadImage = async () => {
+    if (!imageFile) return null;
+    const fileName = `${Date.now()}_${imageFile.name}`;
+    const { data, error } = await supabase.storage
+      .from('pictures') // あなたのバケット名
+      .upload(fileName, imageFile);
+
+    if (error) {
+      console.error(error);
+      return null;
+    }
+
+    const { data: publicUrlData } = await supabase.storage
+      .from('pictures')
+      .getPublicUrl(fileName);
+    const publicUrl = publicUrlData.publicUrl;
+    return publicUrl;
+  };
 
   const onSubmit = async (event: any) => {
     event.preventDefault();
     showModal(false);
+
     try {
+      const image_url = await uploadImage();
+
       const { data, error } = await supabase
         .from('shopInfo')
         .insert({
@@ -26,9 +61,10 @@ export default function AddDialog(props: {
           favorite_menu_02: favorite_menu_02,
           favorite_menu_03: favorite_menu_03,
           instagram_id: instagram_id,
-          image_url: imageUrl,
+          imageUrl: image_url,
         })
         .select();
+
       if (error) {
         console.log(error);
       } else {
@@ -48,12 +84,10 @@ export default function AddDialog(props: {
             <button
               type="button"
               className="end-2.5 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900"
-              data-modal-hide="authentication-modal"
               onClick={() => showModal(false)}
             >
               <svg
                 className="h-3 w-3"
-                aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 14 14"
@@ -66,18 +100,30 @@ export default function AddDialog(props: {
                   d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                 />
               </svg>
-              <span className="sr-only">モーダルを閉じる</span>
             </button>
           </div>
           <div className="p-4 md:p-5">
             <form className="mt-4" onSubmit={onSubmit}>
+              <label htmlFor="image-upload" className="cursor-pointer">
+                <div className="flex h-32 w-32 items-center justify-center overflow-hidden rounded-full border border-gray-300 bg-gray-200">
+                  {imageUrl ? (
+                    <img
+                      src={imageUrl}
+                      alt=""
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <div className="text-gray-500">+</div>
+                  )}
+                </div>
+              </label>
+
               <input
+                id="image-upload"
                 type="file"
-                className="w-full rounded-lg border border-gray-300 px-2 py-1"
-                placeholder="画像を選択してください"
-                required
-                value={imageUrl}
-                onChange={(e) => setImageUrl(e.target.value)}
+                accept="image/*"
+                className="hidden"
+                onChange={handleImageChange}
               />
               <input
                 type="text"
@@ -108,7 +154,6 @@ export default function AddDialog(props: {
                 type="text"
                 className="w-full rounded-lg border border-gray-300 px-2 py-1"
                 placeholder="好きなメニューを入力してください"
-                required
                 value={favorite_menu_02}
                 onChange={(e) => setMenu02(e.target.value)}
               />
@@ -116,14 +161,13 @@ export default function AddDialog(props: {
                 type="text"
                 className="w-full rounded-lg border border-gray-300 px-2 py-1"
                 placeholder="好きなメニューを入力してください"
-                required
                 value={favorite_menu_03}
                 onChange={(e) => setMenu03(e.target.value)}
               />
               <textarea
                 name="text"
                 id="review"
-                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900"
                 required
                 value={shop_review}
                 placeholder="レビューを入力してください"
