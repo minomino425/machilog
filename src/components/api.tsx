@@ -1,4 +1,4 @@
-import { supabase } from "@/utils/supabase";
+import { supabase } from '@/utils/supabase';
 
 type shopInfoType = {
   created_at: string;
@@ -9,12 +9,14 @@ type shopInfoType = {
   imageUrl: string | null;
 };
 
-export async function getShopInfoById(id: number): Promise<shopInfoType | null> {
+export async function getShopInfoById(
+  id: number,
+): Promise<shopInfoType | null> {
   try {
     const { data, error } = await supabase
-      .from("shopInfo")
-      .select("*")
-      .eq("id", id)
+      .from('shopInfo')
+      .select('*')
+      .eq('id', id)
       .single();
     if (error) {
       throw error;

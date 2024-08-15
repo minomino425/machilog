@@ -1,7 +1,7 @@
-"use client";
-import AddShop from "./addShop";
-import { ReactElement, useState, useEffect } from "react";
-import getData from "./getData";
+'use client';
+import AddShop from './addShop';
+import { ReactElement, useState, useEffect } from 'react';
+import getData from './getData';
 
 export default function ShopTable() {
   const [shopList, setShopList] = useState<Array<ReactElement>>([]);
@@ -11,10 +11,10 @@ export default function ShopTable() {
   }, []);
 
   return (
-    <div className="bg-white rounded-3xl max-w-[355px] border-2 border-[#090A0A] mb-8">
-      <div className="p-5 relative">
+    <div className="mb-8 max-w-[355px] rounded-3xl border-2 border-[#090A0A] bg-white">
+      <div className="relative p-5">
         <AddShop />
-        <ul className="flex justify-between flex-wrap gap-y-9">{shopList}</ul>
+        <ul className="flex flex-wrap justify-between gap-y-9">{shopList}</ul>
       </div>
     </div>
   );

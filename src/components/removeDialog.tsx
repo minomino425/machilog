@@ -1,5 +1,5 @@
-import { supabase } from "@/utils/supabase";
-import { Dispatch, SetStateAction, ReactElement } from "react";
+import { supabase } from '@/utils/supabase';
+import { Dispatch, SetStateAction, ReactElement } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function RemoveDialog(props: {
@@ -7,40 +7,40 @@ export default function RemoveDialog(props: {
   showModal: Dispatch<SetStateAction<boolean>>;
 }) {
   const { showModal } = props;
-  const router = useRouter(); 
+  const router = useRouter();
   const onSubmit = async (event: any) => {
     event.preventDefault();
     showModal(false);
     try {
       const { error } = await supabase
-        .from("shopInfo")
+        .from('shopInfo')
         .delete()
-        .eq("id", props.id);
+        .eq('id', props.id);
       if (error) {
         console.log(error);
       }
-      router.push("/");
+      router.push('/');
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-screen bg-black-rgba pt-28">
-      <div className="m-auto relative p-4 w-full max-w-md max-h-full">
-        <div className="relative bg-white rounded-lg shadow">
-          <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+    <div className="bg-black-rgba fixed left-0 right-0 top-0 z-50 h-screen w-full items-center justify-center overflow-y-auto overflow-x-hidden pt-28">
+      <div className="relative m-auto max-h-full w-full max-w-md p-4">
+        <div className="relative rounded-lg bg-white shadow">
+          <div className="flex items-center justify-between rounded-t border-b p-4 md:p-5">
             <h3 className="text-xl font-semibold text-gray-900">
               店名を削除します。よろしいですか？
             </h3>
             <button
               type="button"
-              className="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+              className="end-2.5 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900"
               data-modal-hide="authentication-modal"
               onClick={() => showModal(false)}
             >
               <svg
-                className="w-3 h-3"
+                className="h-3 w-3"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -62,13 +62,13 @@ export default function RemoveDialog(props: {
               <form className="w-1/2" onSubmit={onSubmit}>
                 <button
                   type="submit"
-                  className="w-full text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 text-center"
+                  className="w-full rounded-lg bg-blue-500 px-5 text-center text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300"
                 >
                   店名を削除
                 </button>
               </form>
               <button
-                className="ml-2 w-1/2 text-white bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 text-center"
+                className="ml-2 w-1/2 rounded-lg bg-gray-400 px-5 text-center text-sm font-medium text-white hover:bg-gray-500 focus:outline-none focus:ring-4 focus:ring-blue-300"
                 onClick={() => showModal(false)}
               >
                 キャンセル

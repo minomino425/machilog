@@ -1,6 +1,6 @@
-import { useState, Dispatch, SetStateAction, ReactElement } from "react";
-import EditDialog from "./editDialog";
-import RemoveDialog from "./removeDialog";
+import { useState, Dispatch, SetStateAction, ReactElement } from 'react';
+import EditDialog from './editDialog';
+import RemoveDialog from './removeDialog';
 type shopInfoType = {
   created_at: string;
   id: number;
@@ -8,7 +8,7 @@ type shopInfoType = {
   shop_name: string | null;
   shop_review: string | null;
   imageUrl: string | null;
-} | null
+} | null;
 
 export default function editData(props: {
   id: number;
@@ -39,16 +39,10 @@ export default function editData(props: {
         </button>
       </div>
       {showEditModal ? (
-        <EditDialog
-          id={id}
-          showModal={setShowEditModal}
-        ></EditDialog>
+        <EditDialog id={id} showModal={setShowEditModal}></EditDialog>
       ) : null}
       {showRemoveModal ? (
-        <RemoveDialog
-          id={id}
-          showModal={setShowRemoveModal}
-        ></RemoveDialog>
+        <RemoveDialog id={id} showModal={setShowRemoveModal}></RemoveDialog>
       ) : null}
     </>
   );
