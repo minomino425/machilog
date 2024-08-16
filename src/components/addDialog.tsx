@@ -78,9 +78,8 @@ export default function AddDialog(props: {
   return (
     <div className="bg-black-rgba fixed left-0 right-0 top-0 z-50 h-screen w-full items-center justify-center overflow-y-auto overflow-x-hidden pt-28">
       <div className="relative m-auto max-h-full w-full max-w-md p-4">
-        <div className="max-w-355 relative rounded-lg bg-white">
-          <div className="flex items-center rounded-t border-b p-4 md:p-5">
-            <h3 className="text-xl font-semibold text-gray-900">追加</h3>
+        <div className="max-w-355 relative rounded-lg border-2 border-[#090A0A] bg-white">
+          <div className="flex items-center rounded-t md:p-5">
             <button
               type="button"
               className="end-2.5 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900"
@@ -102,18 +101,51 @@ export default function AddDialog(props: {
               </svg>
             </button>
           </div>
-          <div className="p-4 md:p-5">
-            <form className="mt-4" onSubmit={onSubmit}>
-              <label htmlFor="image-upload" className="cursor-pointer">
-                <div className="flex h-32 w-32 items-center justify-center overflow-hidden rounded-full border border-gray-300 bg-gray-200">
+          <div className="mx-auto w-[70%] pb-5 text-center">
+            <form className="" onSubmit={onSubmit}>
+              <label
+                htmlFor="image-upload"
+                className="mb-8 inline-block cursor-pointer"
+              >
+                <div className="q flex h-32 w-32 items-center justify-center overflow-hidden rounded-full bg-gray-200">
                   {imageUrl ? (
-                    <img
-                      src={imageUrl}
-                      alt=""
-                      className="h-full w-full object-cover"
-                    />
+                    <>
+                      <div className="relative">
+                        <img
+                          src={imageUrl}
+                          alt=""
+                          className="h-full w-full object-cover"
+                        />
+                        <div className="absolute  left-1/2 top-1/2 h-32 w-32  -translate-x-1/2 -translate-y-1/2 rounded-full bg-black/40"></div>
+                        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
+                          <svg
+                            width="30"
+                            height="27"
+                            viewBox="0 0 30 27"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M15 21.75C16.875 21.75 18.4687 21.0937 19.7812 19.7812C21.0937 18.4687 21.75 16.875 21.75 15C21.75 13.125 21.0937 11.5312 19.7812 10.2187C18.4687 8.90625 16.875 8.25 15 8.25C13.125 8.25 11.5312 8.90625 10.2187 10.2187C8.90625 11.5312 8.25 13.125 8.25 15C8.25 16.875 8.90625 18.4687 10.2187 19.7812C11.5312 21.0937 13.125 21.75 15 21.75ZM15 18.75C13.95 18.75 13.0625 18.3875 12.3375 17.6625C11.6125 16.9375 11.25 16.05 11.25 15C11.25 13.95 11.6125 13.0625 12.3375 12.3375C13.0625 11.6125 13.95 11.25 15 11.25C16.05 11.25 16.9375 11.6125 17.6625 12.3375C18.3875 13.0625 18.75 13.95 18.75 15C18.75 16.05 18.3875 16.9375 17.6625 17.6625C16.9375 18.3875 16.05 18.75 15 18.75ZM3 27C2.175 27 1.46875 26.7062 0.88125 26.1187C0.29375 25.5312 0 24.825 0 24V6C0 5.175 0.29375 4.46875 0.88125 3.88125C1.46875 3.29375 2.175 3 3 3H7.725L10.5 0H19.5L22.275 3H27C27.825 3 28.5312 3.29375 29.1187 3.88125C29.7062 4.46875 30 5.175 30 6V24C30 24.825 29.7062 25.5312 29.1187 26.1187C28.5312 26.7062 27.825 27 27 27H3ZM3 24H27V6H20.925L18.1875 3H11.8125L9.075 6H3V24Z"
+                              fill="white"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </>
                   ) : (
-                    <div className="text-gray-500">+</div>
+                    <svg
+                      width="30"
+                      height="27"
+                      viewBox="0 0 30 27"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M15 21.75C16.875 21.75 18.4687 21.0937 19.7812 19.7812C21.0937 18.4687 21.75 16.875 21.75 15C21.75 13.125 21.0937 11.5312 19.7812 10.2187C18.4687 8.90625 16.875 8.25 15 8.25C13.125 8.25 11.5312 8.90625 10.2187 10.2187C8.90625 11.5312 8.25 13.125 8.25 15C8.25 16.875 8.90625 18.4687 10.2187 19.7812C11.5312 21.0937 13.125 21.75 15 21.75ZM15 18.75C13.95 18.75 13.0625 18.3875 12.3375 17.6625C11.6125 16.9375 11.25 16.05 11.25 15C11.25 13.95 11.6125 13.0625 12.3375 12.3375C13.0625 11.6125 13.95 11.25 15 11.25C16.05 11.25 16.9375 11.6125 17.6625 12.3375C18.3875 13.0625 18.75 13.95 18.75 15C18.75 16.05 18.3875 16.9375 17.6625 17.6625C16.9375 18.3875 16.05 18.75 15 18.75ZM3 27C2.175 27 1.46875 26.7062 0.88125 26.1187C0.29375 25.5312 0 24.825 0 24V6C0 5.175 0.29375 4.46875 0.88125 3.88125C1.46875 3.29375 2.175 3 3 3H7.725L10.5 0H19.5L22.275 3H27C27.825 3 28.5312 3.29375 29.1187 3.88125C29.7062 4.46875 30 5.175 30 6V24C30 24.825 29.7062 25.5312 29.1187 26.1187C28.5312 26.7062 27.825 27 27 27H3ZM3 24H27V6H20.925L18.1875 3H11.8125L9.075 6H3V24Z"
+                        fill="white"
+                      />
+                    </svg>
                   )}
                 </div>
               </label>
