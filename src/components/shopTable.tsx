@@ -11,11 +11,13 @@ export default function ShopTable() {
   }, []);
 
   return (
-    <div className="mb-8 max-w-[355px] rounded-3xl border-2 border-[#090A0A] bg-white">
-      <div className="relative p-5">
-        <AddShop />
-        <ul className="flex flex-wrap justify-between gap-y-9">{shopList}</ul>
+    <>
+      <div className="mb-8 max-w-[355px] rounded-3xl border-2 border-[#090A0A] bg-white">
+        <div className="relative p-5">
+          <ul className="flex flex-wrap justify-between gap-y-9">{shopList}</ul>
+        </div>
       </div>
-    </div>
+      <AddShop />
+    </>
   );
 }

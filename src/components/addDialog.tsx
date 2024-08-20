@@ -1,25 +1,38 @@
 import { supabase } from '@/utils/supabase';
 import { Dispatch, SetStateAction, useState } from 'react';
+import { useForm, useFieldArray } from 'react-hook-form';
+
+type FormValues = {
+  shop_name: string;
+  shop_review: string;
+  favorite_menus: { value: string }[];
+  instagram_id: string;
+  imageUrl: FileList;
+};
 
 export default function AddDialog(props: {
   showModal: Dispatch<SetStateAction<boolean>>;
 }) {
   const { showModal } = props;
-  const [shop_name, setText] = useState('');
-  const [shop_review, setReview] = useState('');
-  const [favorite_menu_01, setMenu01] = useState('');
-  const [favorite_menu_02, setMenu02] = useState('');
-  const [favorite_menu_03, setMenu03] = useState('');
-  const [menus, setMenus] = useState(['']);
-  const [instagram_id, setInstagramId] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-  const [imageFile, setImageFile] = useState<File | null>(null);
+  const { register, handleSubmit, control, reset } = useForm<FormValues>({
+    defaultValues: {
+      shop_name: '',
+      instagram_id: '',
+      shop_review: '',
+      favorite_menus: [{ value: '' }],
+    },
+  });
+  const { fields, append, remove } = useFieldArray<FormValues>({
+    control,
+    name: 'favorite_menus',
+  });
 
-  const uploadImage = async () => {
+  const uploadImage = async (imageFile: File | null) => {
     if (!imageFile) return null;
     const fileName = `${Date.now()}_${imageFile.name}`;
     const { data, error } = await supabase.storage
-      .from('pictures') // あなたのバケット名
+      .from('pictures')
       .upload(fileName, imageFile);
 
     if (error) {
@@ -34,37 +47,22 @@ export default function AddDialog(props: {
     return publicUrl;
   };
 
-  const handleAddMenu = () => {
-    setMenus([...menus, '']);
-  };
-
-  const handleMenuChange = (index: number, value: string) => {
-    const updatedMenus = [...menus];
-    updatedMenus[index] = value;
-    setMenus(updatedMenus);
-  };
-
-  const handleRemoveMenu = (index: number) => {
-    const updatedMenus = menus.filter((_, i) => i !== index);
-    setMenus(updatedMenus);
-  };
-
-  const onSubmit = async (event: any) => {
-    event.preventDefault();
+  const onSubmit = async (data: FormValues) => {
     showModal(false);
 
     try {
-      const image_url = await uploadImage();
+      const imageFile = data.imageUrl[0];
+      const image_url = await uploadImage(imageFile);
 
-      const { data, error } = await supabase
+      console.log(image_url);
+
+      const { data: supabaseData, error } = await supabase
         .from('shopInfo')
         .insert({
-          shop_name: shop_name,
-          shop_review: shop_review,
-          favorite_menu_01: favorite_menu_01,
-          favorite_menu_02: favorite_menu_02,
-          favorite_menu_03: favorite_menu_03,
-          instagram_id: instagram_id,
+          shop_name: data.shop_name,
+          shop_review: data.shop_review,
+          favorite_menus: data.favorite_menus,
+          instagram_id: data.instagram_id,
           imageUrl: image_url,
         })
         .select();
@@ -72,6 +70,7 @@ export default function AddDialog(props: {
       if (error) {
         console.log(error);
       } else {
+        reset();
         window.location.reload();
       }
     } catch (error) {
@@ -80,17 +79,17 @@ export default function AddDialog(props: {
   };
 
   return (
-    <div className="bg-black-rgba fixed left-0 right-0 top-0 z-50 h-screen w-full items-center justify-center overflow-y-auto overflow-x-hidden pt-28">
-      <div className="relative m-auto max-h-full w-full max-w-md p-4">
-        <div className="max-w-355 relative rounded-lg border-2 border-[#090A0A] bg-white">
-          <div className="flex items-center rounded-t md:p-5">
+    <div className="bg-black-rgba fixed  inset-0 z-20 flex items-center justify-center">
+      <div className="relative w-full p-4">
+        <div className="relative h-[75vh] max-w-[355px] rounded-lg border-2 border-[#090A0A] bg-white pt-3">
+          <div className="mr-2 flex items-center rounded-t md:p-5">
             <button
               type="button"
-              className="end-2.5 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900"
+              className="ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900"
               onClick={() => showModal(false)}
             >
               <svg
-                className="h-3 w-3"
+                className="h-4 w-4"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 14 14"
@@ -105,8 +104,8 @@ export default function AddDialog(props: {
               </svg>
             </button>
           </div>
-          <div className="mx-auto w-[70%] pb-5">
-            <form className="" onSubmit={onSubmit}>
+          <div className="mx-auto h-[90%] w-[70%] overflow-x-hidden">
+            <form className="" onSubmit={handleSubmit(onSubmit)}>
               <div className="text-center">
                 <label
                   htmlFor="image-upload"
@@ -148,98 +147,93 @@ export default function AddDialog(props: {
                       >
                         <path
                           d="M15 21.75C16.875 21.75 18.4687 21.0937 19.7812 19.7812C21.0937 18.4687 21.75 16.875 21.75 15C21.75 13.125 21.0937 11.5312 19.7812 10.2187C18.4687 8.90625 16.875 8.25 15 8.25C13.125 8.25 11.5312 8.90625 10.2187 10.2187C8.90625 11.5312 8.25 13.125 8.25 15C8.25 16.875 8.90625 18.4687 10.2187 19.7812C11.5312 21.0937 13.125 21.75 15 21.75ZM15 18.75C13.95 18.75 13.0625 18.3875 12.3375 17.6625C11.6125 16.9375 11.25 16.05 11.25 15C11.25 13.95 11.6125 13.0625 12.3375 12.3375C13.0625 11.6125 13.95 11.25 15 11.25C16.05 11.25 16.9375 11.6125 17.6625 12.3375C18.3875 13.0625 18.75 13.95 18.75 15C18.75 16.05 18.3875 16.9375 17.6625 17.6625C16.9375 18.3875 16.05 18.75 15 18.75ZM3 27C2.175 27 1.46875 26.7062 0.88125 26.1187C0.29375 25.5312 0 24.825 0 24V6C0 5.175 0.29375 4.46875 0.88125 3.88125C1.46875 3.29375 2.175 3 3 3H7.725L10.5 0H19.5L22.275 3H27C27.825 3 28.5312 3.29375 29.1187 3.88125C29.7062 4.46875 30 5.175 30 6V24C30 24.825 29.7062 25.5312 29.1187 26.1187C28.5312 26.7062 27.825 27 27 27H3ZM3 24H27V6H20.925L18.1875 3H11.8125L9.075 6H3V24Z"
-                          fill="white"
+                          fill="#666666"
                         />
                       </svg>
                     )}
                   </div>
                 </label>
-              </div>
-              <div className="mb-4">
-                <label htmlFor="shop_name" className="block font-semibold">
-                  店名
-                </label>
                 <input
-                  id="shop_name"
-                  type="text"
-                  className="w-full rounded-lg border border-gray-300 px-2 py-1"
-                  placeholder="店名を入力してください"
-                  required
-                  value={shop_name}
-                  onChange={(e) => setText(e.target.value)}
+                  {...register('imageUrl')}
+                  id="image-upload"
+                  type="file"
+                  className="hidden"
+                  onChange={(e) => {
+                    if (e.target.files && e.target.files[0]) {
+                      setImageUrl(URL.createObjectURL(e.target.files[0]));
+                    }
+                  }}
                 />
               </div>
-
               <div className="mb-4">
-                <label htmlFor="instagram_id" className="block font-semibold">
+                <label className="mb-1 block text-sm font-medium text-gray-700">
+                  お店の名前
+                </label>
+                <input
+                  {...register('shop_name')}
+                  type="text"
+                  placeholder="お店の名前"
+                  className="w-full rounded-lg border-2 border-[#090A0A] py-3 pl-3 text-sm text-black"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="mb-1 block text-sm font-medium text-gray-700">
                   Instagram ID
                 </label>
                 <input
-                  id="instagram_id"
+                  {...register('instagram_id')}
                   type="text"
-                  className="w-full rounded-lg border border-gray-300 px-2 py-1"
-                  placeholder="Instagram IDを入力してください"
-                  required
-                  value={instagram_id}
-                  onChange={(e) => setInstagramId(e.target.value)}
+                  placeholder="Instagram ID"
+                  className="w-full rounded-lg border-2 border-[#090A0A] py-3 pl-3 text-sm text-black"
                 />
               </div>
-
               <div className="mb-4">
-                <label htmlFor="favorite_menu" className="block font-semibold">
-                  好きなメニュー
-                </label>
-                {menus.map((menu, index) => (
-                  <div key={index} className="relative mb-4">
-                    <input
-                      id={`favorite_menu_${index + 1}`}
-                      type="text"
-                      className="w-full rounded-lg border border-gray-300 px-2 py-1"
-                      placeholder="好きなメニューを入力してください"
-                      value={menu}
-                      onChange={(e) => handleMenuChange(index, e.target.value)}
-                    />
-                    {menus.length > 1 && (
+                <div className="mb-4">
+                  <label className="mb-1 block text-sm font-medium text-gray-700">
+                    好きなメニュー
+                  </label>
+                  {fields.map((field, index) => (
+                    <div key={field.id} className="mb-2 flex items-center">
+                      <input
+                        {...register(`favorite_menus.${index}`)}
+                        type="text"
+                        placeholder="メニュー名"
+                        className="w-full rounded-lg border-2 border-[#090A0A] py-3 pl-3 text-sm text-black"
+                      />
                       <button
                         type="button"
-                        className="absolute right-2 top-1/2 -translate-y-1/2 transform text-red-500"
-                        onClick={() => handleRemoveMenu(index)}
+                        className="ml-2 text-red-500"
+                        onClick={() => remove(index)}
                       >
                         ×
                       </button>
-                    )}
-                  </div>
-                ))}
-                {menus.length < 3 && (
+                    </div>
+                  ))}
                   <button
                     type="button"
-                    className="rounded-lg bg-blue-500 px-4 py-2 text-white"
-                    onClick={handleAddMenu}
+                    className="text-blue-500"
+                    onClick={() => append({ value: '' })}
                   >
-                    +
+                    + メニュー追加
                   </button>
-                )}
-              </div>
-
-              <div className="mb-4">
-                <label htmlFor="shop_review" className="block font-semibold">
-                  レビュー
-                </label>
-                <textarea
-                  id="shop_review"
-                  className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900"
-                  placeholder="レビューを入力してください"
-                  required
-                  value={shop_review}
-                  onChange={(e) => setReview(e.target.value)}
-                />
+                </div>
+                <div className="mb-4">
+                  <label className="mb-1 block text-sm font-medium text-gray-700">
+                    レビュー
+                  </label>
+                  <textarea
+                    {...register('shop_review')}
+                    placeholder="レビュー"
+                    className="h-28 w-full rounded-lg border-2 border-[#090A0A] py-3 pl-3 text-sm text-black"
+                  />
+                </div>
               </div>
 
               <button
                 type="submit"
-                className="mt-2 w-full rounded-lg bg-blue-500 px-4 font-semibold text-white hover:bg-blue-600"
+                className="w-full rounded-lg bg-[#090A0A] py-3 text-sm font-medium text-white hover:bg-opacity-90"
               >
-                変更を保存
+                登録する
               </button>
             </form>
           </div>
