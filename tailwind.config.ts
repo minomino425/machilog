@@ -6,7 +6,6 @@ const bgPlugin = plugin(function ({ addComponents }) {
     '.bg-pattern': {
       backgroundImage: 'url("./bg.png")',
       backgroundRepeat: 'no-repeat',
-      backgroundSize: 'cover',
     },
     '@keyframes loop-slide': {
       '0%': {
