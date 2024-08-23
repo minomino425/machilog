@@ -1,4 +1,3 @@
-import { useState, Dispatch, SetStateAction, ReactElement } from 'react';
 import Link from 'next/link';
 
 export default function Shop(props: {
@@ -16,7 +15,7 @@ export default function Shop(props: {
         <img
           src={imageUrl}
           alt={shop_name}
-          className="block h-36 w-36 [clip-path:circle(40%)]"
+          className="block h-36 w-36 [clip-path:circle(45%)]"
         />
         <span className="block text-[14px] font-[600] tracking-wider">
           {shop_name}

@@ -67,7 +67,6 @@ export default function EditDialog(props: {
                   name="text"
                   id="text"
                   className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-                  required
                   value={shop_name}
                   placeholder="店名を入力してください"
                   onChange={(e) => setText(e.target.value)}
@@ -76,7 +75,6 @@ export default function EditDialog(props: {
                   name="text"
                   id="review"
                   className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-                  required
                   value={shop_review}
                   placeholder="レビューを入力してください"
                   onChange={(e) => setReview(e.target.value)}
