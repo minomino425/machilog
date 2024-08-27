@@ -103,7 +103,7 @@ export default function AddDialog(props: {
               </svg>
             </button>
           </div>
-          <div className="mx-auto h-[90%] w-[70%] overflow-x-hidden">
+          <div className="mx-auto h-[90%] overflow-x-hidden">
             <form className="" onSubmit={handleSubmit(onSubmit)}>
               <div className="text-center">
                 <label
@@ -162,19 +162,19 @@ export default function AddDialog(props: {
                   </div>
                 </label>
               </div>
-              <div className="mb-4">
-                <label className="mb-1 block text-sm font-medium text-gray-700">
-                  お店の名前
+              <div className="mx-auto mb-4 w-[70%]">
+                <label className="mb-1 block text-sm font-bold text-gray-700">
+                  店名
                 </label>
                 <input
                   {...register('shop_name')}
                   type="text"
-                  placeholder="お店の名前"
+                  placeholder="店名"
                   className="w-full rounded-lg border-2 border-[#090A0A] py-3 pl-3 text-sm text-black"
                 />
               </div>
-              <div className="mb-4">
-                <label className="mb-1 block text-sm font-medium text-gray-700">
+              <div className="mx-auto mb-4 w-[70%]">
+                <label className="mb-1 block text-sm font-bold text-gray-700">
                   Instagram ID
                 </label>
                 <input
@@ -185,53 +185,106 @@ export default function AddDialog(props: {
                 />
               </div>
               <div className="mb-4">
-                <div className="mb-4">
-                  <label className="mb-1 block text-sm font-medium text-gray-700">
+                <div className="mb-4 ml-[15%] w-[76%]">
+                  <label className="mb-1 block text-sm font-bold text-gray-700">
                     好きなメニュー
                   </label>
                   {fields.map((field, index) => (
-                    <div key={field.id} className="mb-2 flex items-center">
+                    <div
+                      key={field.id}
+                      className="mb-2 flex items-center gap-1"
+                    >
                       <input
-                        {...register(`favorite_menus.${index}`)}
+                        {...register(`favorite_menus.${index}.value`)}
                         type="text"
-                        placeholder="メニュー名"
-                        className="w-full rounded-lg border-2 border-[#090A0A] py-3 pl-3 text-sm text-black"
+                        placeholder="好きなメニュー"
+                        className="w-full min-w-[237px] rounded-lg border-2 border-[#090A0A] py-3 pl-3 text-sm text-black"
                       />
+                      {index > 0 && (
+                        <button
+                          type="button"
+                          className="text-red-500"
+                          onClick={() => remove(index)}
+                        >
+                          <svg
+                            width="15"
+                            height="15"
+                            viewBox="0 0 15 15"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <circle
+                              cx="7.5"
+                              cy="7.5"
+                              r="7"
+                              fill="white"
+                              stroke="black"
+                            />
+                            <line
+                              x1="5.02518"
+                              y1="5.02513"
+                              x2="9.97493"
+                              y2="9.97487"
+                              stroke="black"
+                            />
+                            <path
+                              d="M9.97485 5.02513L5.02511 9.97487"
+                              stroke="black"
+                            />
+                          </svg>
+                        </button>
+                      )}
                       <button
                         type="button"
-                        className="ml-2 text-red-500"
-                        onClick={() => remove(index)}
+                        className=""
+                        onClick={() => append({ value: '' })}
                       >
-                        ×
+                        <svg
+                          width="15"
+                          height="15"
+                          viewBox="0 0 15 15"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <circle
+                            cx="7.5"
+                            cy="7.5"
+                            r="7"
+                            fill="white"
+                            stroke="black"
+                          />
+                          <line
+                            x1="4"
+                            y1="7.5"
+                            x2="11"
+                            y2="7.5"
+                            stroke="black"
+                          />
+                          <path d="M7.5 4L7.5 11" stroke="black" />
+                        </svg>
                       </button>
                     </div>
                   ))}
-                  <button
-                    type="button"
-                    className="text-blue-500"
-                    onClick={() => append({ value: '' })}
-                  >
-                    + メニュー追加
-                  </button>
                 </div>
-                <div className="mb-4">
-                  <label className="mb-1 block text-sm font-medium text-gray-700">
-                    レビュー
+                <div className="mx-auto mb-4 w-[70%]">
+                  <label className="mb-1 block text-sm font-bold text-gray-700">
+                    好きポイント
                   </label>
                   <textarea
                     {...register('shop_review')}
-                    placeholder="レビュー"
+                    placeholder="このお店の好きなポイント"
                     className="h-28 w-full rounded-lg border-2 border-[#090A0A] py-3 pl-3 text-sm text-black"
                   />
                 </div>
               </div>
-
-              <button
-                type="submit"
-                className="w-full rounded-lg bg-[#090A0A] py-3 text-sm font-medium text-white hover:bg-opacity-90"
-              >
-                登録する
-              </button>
+              <div className="mx-auto mb-4 w-[70%]">
+                <button
+                  type="submit"
+                  className="w-full rounded-lg border-2 border-[#090A0A] bg-[#FDFF89] py-3 text-sm font-bold text-black"
+                >
+                  登録する
+                </button>
+              </div>
             </form>
           </div>
         </div>
