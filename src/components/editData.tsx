@@ -4,7 +4,6 @@ import RemoveDialog from './removeDialog';
 type shopInfoType = {
   created_at: string;
   id: number;
-  shop_genre: string | null;
   shop_name: string | null;
   shop_review: string | null;
   imageUrl: string | null;

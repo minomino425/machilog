@@ -3,16 +3,16 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Header from '../../../components/header';
 import { getShopInfoById } from '../../../components/api';
-import Upload from '../../../components/upload';
 import EditData from '../../../components/editData';
 
 type shopInfoType = {
   created_at: string;
   id: number;
-  shop_genre: string | null;
   shop_name: string | null;
   shop_review: string | null;
+  favorite_menus: { value: string }[] | null;
   imageUrl: string | null;
+  instagram_id: string | null;
 } | null;
 
 export default function ShopDetailPage() {
@@ -29,7 +29,8 @@ export default function ShopDetailPage() {
   const fetchData = async () => {
     try {
       const data = await getShopInfoById(Number(id));
-      setShopInfo(data);
+      console.log(data);
+      setShopInfo(data as shopInfoType);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -45,16 +46,35 @@ export default function ShopDetailPage() {
 
   return (
     <div>
-      <Header shop_name={shopInfo.shop_name} />
-      <p>{shopInfo.shop_review}</p>
-      <img
-        src={shopInfo.imageUrl ?? ''}
-        alt={shopInfo.shop_name ?? ''}
-        className="block h-36 w-36 [clip-path:circle(45%)]"
-      />
-      <p>
-        最終更新日時：{new Date(shopInfo.created_at).toLocaleString('ja-JP')}
-      </p>
+      {shopInfo.instagram_id ? (
+        <Header
+          shop_name={shopInfo.shop_name}
+          instagram_id={shopInfo.instagram_id}
+        />
+      ) : (
+        <Header shop_name={shopInfo.shop_name} />
+      )}
+      <div className="mt-2 flex justify-center">
+        <img
+          src={shopInfo.imageUrl ?? ''}
+          alt={shopInfo.shop_name ?? ''}
+          className="block h-48 w-48 [clip-path:circle(45%)]"
+        />
+      </div>
+      <div className="mx-auto mb-8 mt-4 max-w-[355px] rounded-3xl border-2 border-[#090A0A] bg-white px-4 py-6">
+        <div className="mb-2">
+          <p className="text-base font-medium tracking-wider">
+            🍭好きなメニュー
+          </p>
+          {shopInfo.favorite_menus?.map((menu) => (
+            <p className="mt-1 text-sm tracking-wider">{menu.value}</p>
+          ))}
+        </div>
+        <div className="mb-2">
+          <p className="text-base font-medium tracking-wider">🍒好きポイント</p>
+          <p className="mt-1 text-sm tracking-wider">{shopInfo.shop_review}</p>
+        </div>
+      </div>
       <EditData
         id={shopInfo.id}
         shop_name={shopInfo.shop_name}
