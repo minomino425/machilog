@@ -12,8 +12,11 @@ export type Database = {
       shopInfo: {
         Row: {
           created_at: string
+          favorite_level: number | null
+          favorite_menus: Json | null
           id: number
           imageUrl: string | null
+          instagram_id: string | null
           shop_genre: string | null
           shop_name: string | null
           shop_review: string | null
@@ -22,8 +25,11 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          favorite_level?: number | null
+          favorite_menus?: Json | null
           id?: number
           imageUrl?: string | null
+          instagram_id?: string | null
           shop_genre?: string | null
           shop_name?: string | null
           shop_review?: string | null
@@ -32,8 +38,11 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          favorite_level?: number | null
+          favorite_menus?: Json | null
           id?: number
           imageUrl?: string | null
+          instagram_id?: string | null
           shop_genre?: string | null
           shop_name?: string | null
           shop_review?: string | null
