@@ -1,14 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import EditData from './editData';
+import { useParams } from 'next/navigation';
+import { getShopInfoById } from './api';
 
 type shopInfoType = {
+  id: number;
   shop_name: string | null;
   instagram_id?: string | null;
 };
 
 export default function Header({ shop_name, instagram_id }: shopInfoType) {
+  const params = useParams();
+
+  const id = params?.id;
+  const [shopInfo, setShopInfo] = useState<shopInfoType | null>(null);
+  useEffect(() => {
+    if (id) {
+      fetchData();
+    }
+  }, [id]);
+
+  const fetchData = async () => {
+    try {
+      const data = await getShopInfoById(Number(id));
+      console.log(data);
+      setShopInfo(data as shopInfoType);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  if (!shopInfo) {
+    return <p>Loading...</p>;
+  }
+
+  if (!id) {
+    return null;
+  }
+
   return (
     <div className="bg-[#FDFF89] p-3">
-      <div className="flex items-center justify-between">
+      <div className="relative mx-auto flex max-w-[355px] items-center justify-between">
         <button onClick={() => window.history.back()}>
           <svg
             width="11"
@@ -64,6 +96,7 @@ export default function Header({ shop_name, instagram_id }: shopInfoType) {
             <circle cx="13.5" cy="1.5" r="1.5" fill="#090A0A" />
           </svg>
         </button>
+        <EditData id={shopInfo.id} shop_name={shopInfo.shop_name} />
       </div>
     </div>
   );

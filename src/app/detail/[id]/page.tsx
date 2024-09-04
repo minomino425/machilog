@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Header from '../../../components/header';
 import { getShopInfoById } from '../../../components/api';
-import EditData from '../../../components/editData';
 
 type shopInfoType = {
   created_at: string;
@@ -45,41 +44,43 @@ export default function ShopDetailPage() {
   }
 
   return (
-    <div>
-      {shopInfo.instagram_id ? (
-        <Header
-          shop_name={shopInfo.shop_name}
-          instagram_id={shopInfo.instagram_id}
-        />
-      ) : (
-        <Header shop_name={shopInfo.shop_name} />
-      )}
-      <div className="mt-2 flex justify-center">
-        <img
-          src={shopInfo.imageUrl ?? ''}
-          alt={shopInfo.shop_name ?? ''}
-          className="block h-48 w-48 [clip-path:circle(45%)]"
-        />
-      </div>
-      <div className="mx-auto mb-8 mt-4 max-w-[355px] rounded-3xl border-2 border-[#090A0A] bg-white px-4 py-6">
-        <div className="mb-2">
-          <p className="text-base font-medium tracking-wider">
-            🍭好きなメニュー
-          </p>
-          {shopInfo.favorite_menus?.map((menu) => (
-            <p className="mt-1 text-sm tracking-wider">{menu.value}</p>
-          ))}
+    <>
+      <div>
+        {shopInfo.instagram_id ? (
+          <Header
+            id={shopInfo.id}
+            shop_name={shopInfo.shop_name}
+            instagram_id={shopInfo.instagram_id}
+          />
+        ) : (
+          <Header id={shopInfo.id} shop_name={shopInfo.shop_name} />
+        )}
+        <div className="mt-2 flex justify-center">
+          <img
+            src={shopInfo.imageUrl ?? ''}
+            alt={shopInfo.shop_name ?? ''}
+            className="block h-48 w-48 [clip-path:circle(45%)]"
+          />
         </div>
-        <div className="mb-2">
-          <p className="text-base font-medium tracking-wider">🍒好きポイント</p>
-          <p className="mt-1 text-sm tracking-wider">{shopInfo.shop_review}</p>
+        <div className="mx-auto mb-8 mt-4 max-w-[355px] rounded-3xl border-2 border-[#090A0A] bg-white px-4 py-6">
+          <div className="mb-2">
+            <p className="text-base font-medium tracking-wider">
+              🍭好きなメニュー
+            </p>
+            {shopInfo.favorite_menus?.map((menu) => (
+              <p className="mt-1 text-sm tracking-wider">{menu.value}</p>
+            ))}
+          </div>
+          <div className="mb-2">
+            <p className="text-base font-medium tracking-wider">
+              🍒好きポイント
+            </p>
+            <p className="mt-1 text-sm tracking-wider">
+              {shopInfo.shop_review}
+            </p>
+          </div>
         </div>
       </div>
-      <EditData
-        id={shopInfo.id}
-        shop_name={shopInfo.shop_name}
-        created_at={shopInfo.created_at}
-      />
-    </div>
+    </>
   );
 }
