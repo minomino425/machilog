@@ -2,7 +2,6 @@ import { useState, Dispatch, SetStateAction, ReactElement } from 'react';
 import EditDialog from './editDialog';
 import RemoveDialog from './removeDialog';
 type shopInfoType = {
-  created_at: string;
   id: number;
   shop_name: string | null;
   shop_review: string | null;
@@ -12,7 +11,6 @@ type shopInfoType = {
 export default function editData(props: {
   id: number;
   shop_name: string | null;
-  created_at: string | null;
 }) {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showRemoveModal, setShowRemoveModal] = useState(false);
@@ -21,7 +19,7 @@ export default function editData(props: {
 
   return (
     <>
-      <div className="absolute right-1 top-10 w-[30%] rounded-3xl border-2 border-[#090A0A] bg-white p-3">
+      <div className="absolute right-1 top-10 z-10 w-[103px] rounded-xl border-2 border-[#090A0A] bg-white p-2">
         <p
           className="flex items-center gap-2"
           onClick={() => setShowEditModal(true)}
@@ -38,7 +36,7 @@ export default function editData(props: {
               fill="#090A0A"
             />
           </svg>
-          <span>編集する</span>
+          <span className="text-sm">編集する</span>
         </p>
         <p
           className="mt-1 flex items-center gap-2"
@@ -56,7 +54,7 @@ export default function editData(props: {
               fill="#090A0A"
             />
           </svg>
-          <span>削除する</span>
+          <span className="text-sm">削除する</span>
         </p>
       </div>
       {showEditModal ? (
