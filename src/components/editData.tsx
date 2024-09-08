@@ -21,7 +21,7 @@ export default function editData(props: {
     <>
       <div className="absolute right-1 top-10 z-10 w-[103px] rounded-xl border-2 border-[#090A0A] bg-white p-2">
         <p
-          className="flex items-center gap-2"
+          className="flex cursor-pointer items-center gap-2"
           onClick={() => setShowEditModal(true)}
         >
           <svg
@@ -39,7 +39,7 @@ export default function editData(props: {
           <span className="text-sm">編集する</span>
         </p>
         <p
-          className="mt-1 flex items-center gap-2"
+          className="mt-1 flex cursor-pointer items-center gap-2"
           onClick={() => setShowRemoveModal(true)}
         >
           <svg
