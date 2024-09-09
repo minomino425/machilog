@@ -1,7 +1,6 @@
 import React from 'react';
 import './globals.css';
 import { Noto_Sans_JP } from 'next/font/google';
-import ogImage from '../../public/og-image.png';
 
 const NotoSansJPFont = Noto_Sans_JP({
   weight: ['400', '500', '600', '700'],
@@ -32,7 +31,7 @@ export default function RootLayout({
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://machilog.vercel.app/" />
-        <meta property="og:image" content={ogImage.src} />
+        <meta property="og:image" content="../../public/og-image.png" />
         <meta
           property="og:site_name"
           content="🌈マチログ | 町田在住酒好きエンジニアによる外食備忘録🍺"
