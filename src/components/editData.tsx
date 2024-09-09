@@ -58,7 +58,7 @@ export default function editData(props: {
         </p>
       </div>
       {showEditModal ? (
-        <EditDialog id={id} showModal={setShowEditModal}></EditDialog>
+        <EditDialog shopId={id} showModal={setShowEditModal}></EditDialog>
       ) : null}
       {showRemoveModal ? (
         <RemoveDialog id={id} showModal={setShowRemoveModal}></RemoveDialog>
