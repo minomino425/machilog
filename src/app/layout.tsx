@@ -14,7 +14,34 @@ export default function RootLayout({
 }) {
   return (
     <html className={NotoSansJPFont.className}>
-      <head />
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+          name="description"
+          content="町田在住酒好きエンジニアによる外食備忘録🍺"
+        />
+        <meta
+          property="og:title"
+          content="🌈マチログ | 町田在住酒好きエンジニアによる外食備忘録🍺"
+        />
+        <meta
+          property="og:description"
+          content="町田在住酒好きエンジニアによる外食備忘録🍺"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://machilog.vercel.app/" />
+        <meta
+          property="og:image"
+          content="https://machilog.vercel.app/og-image.png"
+        />
+        <meta
+          property="og:site_name"
+          content="🌈マチログ | 町田在住酒好きエンジニアによる外食備忘録🍺"
+        />
+        <meta property="og:locale" content="ja_JP" />
+        <title>🌈マチログ | 町田在住酒好きエンジニアによる外食備忘録🍺</title>
+      </head>
       <body className="font-noto-sans-jp bg-pattern">{children}</body>
     </html>
   );

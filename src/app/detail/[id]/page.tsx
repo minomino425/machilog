@@ -9,7 +9,7 @@ type shopInfoType = {
   id: number;
   shop_name: string | null;
   shop_review: string | null;
-  favorite_menus: string[] | null; // favorite_menus を文字列の配列に変更
+  favorite_menus: { value: string }[];
   imageUrl: string | null;
   instagram_id: string | null;
 } | null;
@@ -70,7 +70,7 @@ export default function ShopDetailPage() {
             {shopInfo.favorite_menus && shopInfo.favorite_menus.length > 0 ? (
               shopInfo.favorite_menus.map((menu, index) => (
                 <p key={index} className="mt-1 text-sm tracking-wider">
-                  {menu} {/* menu.value ではなく menu とする */}
+                  {menu.value}
                 </p>
               ))
             ) : (
