@@ -8,24 +8,21 @@ export default function Upload(props: { id: number }) {
     event: ChangeEvent<HTMLInputElement>,
   ): Promise<void> => {
     if (!event.target.files || event.target.files.length === 0) {
-      // 画像が選択されていない場合は処理を終了
       return;
     }
 
-    const file = event.target.files[0]; // 選択された画像を取得
-    const filePath = `thumbnail/${file.name}`; // 画像の保存先のpathを指定
+    const file = event.target.files[0];
+    const filePath = `thumbnail/${file.name}`;
 
     const { error: uploadError } = await supabase.storage
       .from('pictures')
       .upload(filePath, file);
 
     if (uploadError) {
-      // アップロードエラーが発生した場合の処理
       console.error('Upload error:', uploadError);
       return;
     }
 
-    // アップロードが成功したら画像のURLを取得
     const { data } = await supabase.storage
       .from('pictures')
       .getPublicUrl(filePath);
@@ -33,16 +30,13 @@ export default function Upload(props: { id: number }) {
     const imageUrl = data?.publicUrl;
 
     if (imageUrl) {
-      // 画像のURLを状態にセット
       setImageUrl(imageUrl);
 
-      // 画像のURLをDBに保存
       const { error: insertError } = await supabase
         .from('shopInfo')
         .upsert([{ id: props.id, imageUrl }]);
 
       if (insertError) {
-        // DB挿入エラーが発生した場合の処理
         console.error('Database insertion error:', insertError);
       }
     }
@@ -73,8 +67,37 @@ export default function Upload(props: { id: number }) {
 
   return (
     <div>
-      <input type="file" onChange={handleImageChange} />
-      {imageUrl && <img src={imageUrl} alt="" width="800" height="500" />}
+      <input
+        type="file"
+        onChange={handleImageChange}
+        style={{ display: 'none' }}
+        id="file-input"
+      />
+      <div onClick={() => document.getElementById('file-input')?.click()}>
+        {imageUrl ? (
+          <img
+            src={imageUrl}
+            alt="Uploaded"
+            width="800"
+            height="500"
+            className="mx-auto block h-40 w-40 [clip-path:circle(45%)]"
+          />
+        ) : (
+          <div
+            style={{
+              width: '800px',
+              height: '500px',
+              backgroundColor: '#f0f0f0',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+            }}
+          >
+            画像を選択してください
+          </div>
+        )}
+      </div>
     </div>
   );
 }
