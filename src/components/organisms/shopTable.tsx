@@ -1,6 +1,6 @@
 'use client';
-import AddShop from './addShop';
-import getData from './getData';
+import AddShop from '@/components/molecules/addShop';
+import getData from '@/utils/getData';
 import { ReactElement, useState, useEffect } from 'react';
 
 export default function ShopTable() {

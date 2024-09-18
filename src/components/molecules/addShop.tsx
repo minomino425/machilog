@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import AddDialog from './addDialog';
+import AddDialog from '@/components/organisms/addDialog';
 
 export default function AddShop() {
   const [showEditModal, setShowEditModal] = useState(false);

@@ -1,4 +1,4 @@
-import ShopTable from '@/components/shopTable';
+import ShopTable from '@/components/organisms/shopTable';
 import Image from 'next/image';
 import logo from '../../public/logo.png';
 

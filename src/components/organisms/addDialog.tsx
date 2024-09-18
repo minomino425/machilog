@@ -1,6 +1,7 @@
 import { supabase } from '@/utils/supabase';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
+import InputField from '@/components/atoms/inputField';
 
 type FormValues = {
   shop_name: string;
@@ -162,78 +163,40 @@ export default function AddDialog(props: {
               </label>
             </div>
             <div className="mx-auto mb-4 w-[70%]">
-              <label className="mb-1 block text-sm font-bold text-gray-700">
-                店名
-              </label>
-              <input
-                {...register('shop_name')}
-                type="text"
+              <InputField
+                label="店名"
                 placeholder="店名"
-                className="w-full rounded-lg border-2 border-[#090A0A] py-3 pl-3 text-sm text-black"
+                id="shop_name"
+                register={register}
+              />
+            </div>
+            <div className="mx-auto mb-4 w-[70%]">
+              <InputField
+                label="Instagram ID"
+                placeholder="Instagram ID"
+                id="instagram_id"
+                register={register}
               />
             </div>
             <div className="mx-auto mb-4 w-[70%]">
               <label className="mb-1 block text-sm font-bold text-gray-700">
-                Instagram ID
+                好きなメニュー
               </label>
-              <input
-                {...register('instagram_id')}
-                type="text"
-                placeholder="Instagram ID"
-                className="w-full rounded-lg border-2 border-[#090A0A] py-3 pl-3 text-sm text-black"
-              />
-            </div>
-            <div className="mb-4">
-              <div className="mb-4 ml-[15%] w-[76%]">
-                <label className="mb-1 block text-sm font-bold text-gray-700">
-                  好きなメニュー
-                </label>
-                {fields.map((field, index) => (
-                  <div key={field.id} className="mb-2 flex items-center gap-1">
-                    <input
-                      {...register(`favorite_menus.${index}.value`)}
-                      type="text"
-                      placeholder="好きなメニュー"
-                      className="w-full min-w-[237px] rounded-lg border-2 border-[#090A0A] py-3 pl-3 text-sm text-black"
-                    />
-                    {index > 0 && (
-                      <button
-                        type="button"
-                        className="text-red-500"
-                        onClick={() => remove(index)}
-                      >
-                        <svg
-                          width="15"
-                          height="15"
-                          viewBox="0 0 15 15"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <circle
-                            cx="7.5"
-                            cy="7.5"
-                            r="7"
-                            fill="white"
-                            stroke="black"
-                          />
-                          <line
-                            x1="5.02518"
-                            y1="5.02513"
-                            x2="9.97493"
-                            y2="9.97487"
-                            stroke="black"
-                          />
-                          <path
-                            d="M9.97485 5.02513L5.02511 9.97487"
-                            stroke="black"
-                          />
-                        </svg>
-                      </button>
-                    )}
+              {fields.map((field, index) => (
+                <div
+                  key={field.id}
+                  className="mb-4 flex w-[100%] items-center gap-1"
+                >
+                  <InputField
+                    placeholder="好きなメニュー"
+                    id={`favorite_menus.${index}.value`}
+                    register={register}
+                  />
+                  {index > 0 && (
                     <button
                       type="button"
-                      className=""
-                      onClick={() => append({ value: '' })}
+                      className="text-red-500"
+                      onClick={() => remove(index)}
                     >
                       <svg
                         width="15"
@@ -249,21 +212,52 @@ export default function AddDialog(props: {
                           fill="white"
                           stroke="black"
                         />
-                        <line x1="4" y1="7.5" x2="11" y2="7.5" stroke="black" />
-                        <path d="M7.5 4L7.5 11" stroke="black" />
+                        <line
+                          x1="5.02518"
+                          y1="5.02513"
+                          x2="9.97493"
+                          y2="9.97487"
+                          stroke="black"
+                        />
+                        <path
+                          d="M9.97485 5.02513L5.02511 9.97487"
+                          stroke="black"
+                        />
                       </svg>
                     </button>
-                  </div>
-                ))}
-              </div>
-              <div className="mx-auto mb-4 w-[70%]">
-                <label className="mb-1 block text-sm font-bold text-gray-700">
-                  好きポイント
-                </label>
-                <textarea
-                  {...register('shop_review')}
+                  )}
+                  <button
+                    type="button"
+                    className=""
+                    onClick={() => append({ value: '' })}
+                  >
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 15 15"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle
+                        cx="7.5"
+                        cy="7.5"
+                        r="7"
+                        fill="white"
+                        stroke="black"
+                      />
+                      <line x1="4" y1="7.5" x2="11" y2="7.5" stroke="black" />
+                      <path d="M7.5 4L7.5 11" stroke="black" />
+                    </svg>
+                  </button>
+                </div>
+              ))}
+              <div className="mb-4">
+                <InputField
+                  label="好きポイント"
                   placeholder="このお店の好きなポイント"
-                  className="h-28 w-full rounded-lg border-2 border-[#090A0A] py-3 pl-3 text-sm text-black"
+                  id="shop_review"
+                  register={register}
+                  textarea
                 />
               </div>
             </div>

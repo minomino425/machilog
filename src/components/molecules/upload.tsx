@@ -1,5 +1,5 @@
 import { useState, useEffect, ChangeEvent } from 'react';
-import { supabase } from '../utils/supabase';
+import { supabase } from '@/utils/supabase';
 
 export default function Upload(props: { id: number }) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);

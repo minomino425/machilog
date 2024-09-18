@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import EditData from './editData';
 import { useParams } from 'next/navigation';
-import { getShopInfoById } from './api';
+import { getShopInfoById } from '@/utils/api';
 
 type shopInfoType = {
   id: number;

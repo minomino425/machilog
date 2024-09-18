@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { supabase } from '../utils/supabase';
+import { supabase } from './supabase';
 
 type UploadStorage = {
   folder: FileList;

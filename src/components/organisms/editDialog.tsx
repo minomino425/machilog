@@ -196,7 +196,7 @@ export default function EditDialog(props: {
                 </div>
               </label>
             </div>
-            <div className="mx-auto mb-4 w-[70%]">
+            <div className="">
               <label className="mb-1 block text-sm font-bold text-gray-700">
                 店名
               </label>
@@ -207,7 +207,7 @@ export default function EditDialog(props: {
                 className="w-full rounded-lg border-2 border-[#090A0A] py-3 pl-3 text-sm text-black"
               />
             </div>
-            <div className="mx-auto mb-4 w-[70%]">
+            <div className="">
               <label className="mb-1 block text-sm font-bold text-gray-700">
                 Instagram ID
               </label>
@@ -291,7 +291,7 @@ export default function EditDialog(props: {
                   </div>
                 ))}
               </div>
-              <div className="mx-auto mb-4 w-[70%]">
+              <div className="">
                 <label className="mb-1 block text-sm font-bold text-gray-700">
                   好きポイント
                 </label>
@@ -302,7 +302,7 @@ export default function EditDialog(props: {
                 />
               </div>
             </div>
-            <div className="mx-auto mb-4 w-[70%]">
+            <div className="">
               <button
                 type="submit"
                 className="w-full rounded-lg border-2 border-[#090A0A] bg-[#FDFF89] py-3 text-sm font-bold text-black"
