@@ -1,8 +1,8 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import Header from '../../../components/header';
-import { getShopInfoById } from '../../../components/api';
+import Header from '@/components/organisms/header';
+import { getShopInfoById } from '../../../utils/api';
 
 type shopInfoType = {
   created_at: string;

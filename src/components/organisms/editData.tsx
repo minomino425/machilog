@@ -1,6 +1,6 @@
 import { useState, Dispatch, SetStateAction, ReactElement } from 'react';
-import EditDialog from './editDialog';
-import RemoveDialog from './removeDialog';
+import EditDialog from '@/components/organisms/editDialog';
+import RemoveDialog from '@/components/organisms/removeDialog';
 type shopInfoType = {
   id: number;
   shop_name: string | null;
