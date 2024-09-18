@@ -23,7 +23,7 @@ export default function RootLayout({
         />
         <meta
           property="og:title"
-          content="🌈マチログ | 町田在住酒好きエンジニアによる外食備忘録🍺"
+          content="マチログ | 町田在住酒好きエンジニアによる外食備忘録🍺"
         />
         <meta
           property="og:description"
@@ -34,10 +34,10 @@ export default function RootLayout({
         <meta property="og:image" content="../../public/og-image.png" />
         <meta
           property="og:site_name"
-          content="🌈マチログ | 町田在住酒好きエンジニアによる外食備忘録🍺"
+          content="マチログ | 町田在住酒好きエンジニアによる外食備忘録🍺"
         />
         <meta property="og:locale" content="ja_JP" />
-        <title>🌈マチログ | 町田在住酒好きエンジニアによる外食備忘録🍺</title>
+        <title>マチログ | 町田在住酒好きエンジニアによる外食備忘録🍺</title>
       </head>
       <body className="font-noto-sans-jp bg-pattern">{children}</body>
     </html>
